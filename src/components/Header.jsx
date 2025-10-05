@@ -7,7 +7,7 @@ export default function Header() {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
 
     return (
-        <header className="w-full h-[80px] bg-gradient-to-r from-slate-950 via-slate-900 to-slate-950 shadow-2xl flex justify-between items-center px-6 lg:px-12 relative sticky top-0 z-50 border-b border-slate-800/50 backdrop-blur-sm">
+        <header className="w-full h-[80px] bg-gradient-to-r from-slate-950 via-slate-900 to-slate-950 shadow-2xl flex justify-between items-center px-6 lg:px-12 relative top-0 z-50 border-b border-slate-800/50 backdrop-blur-sm">
             {/* Logo */}
             <Link to="/" className="flex items-center gap-3 group z-10">
                 <div className="relative">

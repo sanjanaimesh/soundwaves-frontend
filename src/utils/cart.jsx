@@ -16,6 +16,15 @@ export function loadCart() {
     return cart;
 }
 
+export function updateCartDates(startingDate, endingDate, days) {
+    const cart = loadCart();
+    cart.startingDate = startingDate;
+    cart.endingDate = endingDate;
+    cart.days = days;
+    const cartString = JSON.stringify(cart);
+    localStorage.setItem("cart", cartString);
+}
+
 export function addToCart(key, qty) {
     const cart = loadCart();
     let found = false;
@@ -27,24 +36,48 @@ export function addToCart(key, qty) {
     }
 
     if(!found){
-        cart.orderedItems.push({key,qty});
+        cart.orderedItems.push({key, qty});
     }
 
     const cartString = JSON.stringify(cart);
     localStorage.setItem("cart", cartString);
 }
 
-export function removeFromCart(){
+export function removeFromCart(key) { // key parameter එක add කළා
     const cart = loadCart();
-    const newCart = cart.orderedItems.filter((item)=>item.key != key);
-    cart.orderedItems= newCart;
-    const cartString= JSON.stringify(cart);
+    const newCart = cart.orderedItems.filter((item) => item.key !== key); // !== use කළා
+    cart.orderedItems = newCart;
+    const cartString = JSON.stringify(cart);
     localStorage.setItem("cart", cartString);
 }
 
-
-
-
+export function updateCartItemQty(key, qty) { // නව function එකක්
+    const cart = loadCart();
+    
+    if (qty <= 0) {
+        // If quantity is 0 or less, remove the item
+        removeFromCart(key);
+        return;
+    }
+    
+    // Find and update the item
+    let found = false;
+    for (let i = 0; i < cart.orderedItems.length; i++) {
+        if (cart.orderedItems[i].key === key) {
+            cart.orderedItems[i].qty = qty;
+            found = true;
+            break;
+        }
+    }
+    
+    // If item not found, add it
+    if (!found) {
+        cart.orderedItems.push({key, qty});
+    }
+    
+    const cartString = JSON.stringify(cart);
+    localStorage.setItem("cart", cartString);
+}
 
 export function formatDate(date) {
     const year = date.getFullYear();
