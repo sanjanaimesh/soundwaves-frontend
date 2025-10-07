@@ -6,6 +6,8 @@ import { Link, Route, Routes, useLocation } from "react-router-dom";
 import AdminItemPage from "./adminItemPage";
 import AddProductPage from "./addItemPage";
 import UpdateItemPage from "./updateItemPage";
+import { AdminUserPage } from "./adminUsersPage";
+import { AdminBookingPage } from "./adminBooking";
 
 export default function AdminPage() {
     const location = useLocation();
@@ -45,11 +47,11 @@ export default function AdminPage() {
             <div className="flex-1 p-6 overflow-y-auto">
                 <Routes>
                     <Route path="/" element={<div className="text-2xl font-semibold">📊 Dashboard Content</div>} />
-                    <Route path="/booking" element={<div className="text-2xl font-semibold">📅 Booking Content</div>} />
+                    <Route path="/booking" element={<AdminBookingPage/>} />
                     <Route path="/items" element={<AdminItemPage />} />
                     <Route path="/items/add" element={<AddProductPage />} />
                     <Route path="/items/edit" element={<UpdateItemPage />} />
-                    <Route path="/users" element={<div className="text-2xl font-semibold">👥 Users Content</div>} />
+                    <Route path="/users" element={<AdminUserPage/>} />
                 </Routes>
             </div>
         </div>
